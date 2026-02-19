@@ -1,28 +1,30 @@
 import { useState } from 'react';
-import { UrlLoader } from './components/UrlLoader';
+import { FileLoader } from './components/FileLoader';
 import { RoadmapGrid } from './components/RoadmapGrid';
-import { fetchExcelFile, parseRoadmap } from './utils/excel';
+import { parseRoadmap } from './utils/excel';
 import type { RoadmapData } from './utils/excel';
 import './styles.css';
+
+const SOURCE_URL =
+  'https://mckessoncorp.sharepoint.com/:x:/s/GRPProductCommercialLeadershipTeam/IQB5wgqUs0k5SLOkUoR3V4JNAf9kLnoYyclcwZUNPoqpNiE?e=t0jlnX';
 
 function App() {
   const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleLoad = async (url: string) => {
+  const handleLoad = (buffer: ArrayBuffer) => {
     setIsLoading(true);
     setError(null);
     setRoadmap(null);
 
     try {
-      const arrayBuffer = await fetchExcelFile(url);
-      const data = parseRoadmap(arrayBuffer);
+      const data = parseRoadmap(buffer);
       setRoadmap(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
-      console.error('Excel loading error:', err);
+      console.error('Excel parsing error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +38,7 @@ function App() {
       </header>
 
       <main className="app-main">
-        <UrlLoader onLoad={handleLoad} isLoading={isLoading} error={error} />
+        <FileLoader onLoad={handleLoad} isLoading={isLoading} error={error} sourceUrl={SOURCE_URL} />
         {roadmap && <RoadmapGrid data={roadmap} />}
       </main>
     </div>

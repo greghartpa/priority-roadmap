@@ -61,78 +61,75 @@ body {
   width: 100%;
 }
 
-/* URL Loader */
-.url-loader {
-  background-color: var(--color-bg-light);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 1rem 1.5rem;
+/* File Loader */
+.file-loader {
   margin-bottom: 1.5rem;
 }
 
-.url-input-row {
-  display: flex;
-  gap: 0.75rem;
+.file-drop-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-bg-light);
 }
 
-.url-input {
-  flex: 1;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.url-input:focus {
-  outline: none;
+.file-drop-zone:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+  background-color: rgba(26, 115, 232, 0.04);
 }
 
-.url-input:disabled {
-  background-color: #e9ecef;
+.file-drop-zone--active {
+  border-color: var(--color-primary);
+  background-color: rgba(26, 115, 232, 0.08);
+}
+
+.file-drop-zone--disabled {
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
-.url-options {
+.file-drop-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.75rem;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-  user-select: none;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
 }
 
-.checkbox-label input {
-  cursor: pointer;
+.file-drop-icon {
+  font-size: 1.5rem;
 }
 
-.warning-message {
-  color: #856404;
-  font-size: 0.85rem;
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  background-color: rgba(230, 168, 23, 0.1);
-  border-left: 3px solid var(--color-warning);
-  border-radius: 2px;
+.file-input-hidden {
+  display: none;
 }
 
-.error-message {
-  color: var(--color-danger);
+.spinner--large {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(26, 115, 232, 0.3);
+  border-top-color: var(--color-primary);
+}
+
+.file-source-hint {
+  margin: 0.5rem 0 0;
   font-size: 0.85rem;
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  background-color: rgba(220, 53, 69, 0.1);
-  border-left: 3px solid var(--color-danger);
-  border-radius: 2px;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.file-source-hint a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.file-source-hint a:hover {
+  text-decoration: underline;
 }
 
 .error-banner {

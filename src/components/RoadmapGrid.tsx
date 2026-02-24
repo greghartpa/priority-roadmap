@@ -23,6 +23,7 @@ export const RoadmapGrid: React.FC<RoadmapGridProps> = ({ data }) => {
   const { teams, quarters, pillars, grid } = data;
   const [expanded, setExpanded] = useState<string | null>(null);
   const [suiteFilter, setSuiteFilter] = useState<string>('');
+  const [pillarFilter, setPillarFilter] = useState<string>('');
 
   const suites = useMemo(
     () => Array.from(new Set(teams.map((t) => t.suite))).sort(),
@@ -71,14 +72,26 @@ export const RoadmapGrid: React.FC<RoadmapGridProps> = ({ data }) => {
           <div className="pillar-legend">
             {pillars.map((p) => {
               const color = getPillarStyle(p);
+              const isActive = pillarFilter === p;
               return (
-                <span key={p} className="pillar-legend-item">
+                <button
+                  key={p}
+                  className={`pillar-legend-item pillar-legend-item--clickable${isActive ? ' pillar-legend-item--active' : ''}`}
+                  onClick={() => {
+                    if (isActive) {
+                      setPillarFilter('');
+                    } else {
+                      setPillarFilter(p);
+                      setSuiteFilter('');
+                    }
+                  }}
+                >
                   <span
                     className="pillar-legend-swatch"
                     style={{ backgroundColor: color.border }}
                   />
                   {p}
-                </span>
+                </button>
               );
             })}
           </div>
@@ -104,7 +117,10 @@ export const RoadmapGrid: React.FC<RoadmapGridProps> = ({ data }) => {
                   <td className="roadmap-team-cell">{team.name}</td>
                   <td className="roadmap-suite-cell">{team.suite}</td>
                   {quarters.map((q) => {
-                    const initiatives = teamMap?.get(q) || [];
+                    const allInitiatives = teamMap?.get(q) || [];
+                    const initiatives = pillarFilter
+                      ? allInitiatives.filter((init) => init.strategyPillar === pillarFilter)
+                      : allInitiatives;
                     const cellKey = `${team.name}|${q}`;
                     const isExpanded = expanded === cellKey;
 

@@ -94,19 +94,6 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
 
   return (
     <div className="heatmap-container">
-      {/* Legend */}
-      <div className="heatmap-legend">
-        {pillars.map((p) => (
-          <span key={p} className="heatmap-legend-item">
-            <span
-              className="heatmap-legend-swatch"
-              style={{ backgroundColor: pillarColorMap.get(p) }}
-            />
-            {p}
-          </span>
-        ))}
-      </div>
-
       <div className="heatmap-grid-wrapper">
         <table className="heatmap-grid">
           <thead>
@@ -158,6 +145,19 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Legend */}
+      <div className="heatmap-legend">
+        {pillars.map((p) => (
+          <span key={p} className="heatmap-legend-item">
+            <span
+              className="heatmap-legend-swatch"
+              style={{ backgroundColor: pillarColorMap.get(p) }}
+            />
+            {p}
+          </span>
+        ))}
       </div>
     </div>
   );

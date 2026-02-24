@@ -98,6 +98,7 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
         <table className="heatmap-grid">
           <thead>
             <tr>
+              <th className="heatmap-suite-header">Suite</th>
               <th className="heatmap-team-header">Team</th>
               {quarters.map((q) => (
                 <th key={q} className="heatmap-quarter-header">{q}</th>
@@ -105,44 +106,45 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {teamsBySuite.map((group) => (
-              <>
-                <tr key={`suite-${group.suite}`} className="heatmap-suite-row">
-                  <td colSpan={quarters.length + 1} className="heatmap-suite-cell">
-                    {group.suite}
-                  </td>
+            {teamsBySuite.map((group) =>
+              group.teams.map((team, teamIdx) => (
+                <tr key={team.name} className="heatmap-team-row">
+                  {teamIdx === 0 && (
+                    <td
+                      className="heatmap-suite-cell"
+                      rowSpan={group.teams.length}
+                    >
+                      {group.suite}
+                    </td>
+                  )}
+                  <td className="heatmap-team-cell">{team.name}</td>
+                  {quarters.map((q) => {
+                    const pills = getPills(team.name, q);
+                    return (
+                      <td key={q} className="heatmap-data-cell">
+                        {pills.length > 0 && (
+                          <div className="heatmap-pills">
+                            {pills.map((pill, i) => (
+                              <span
+                                key={i}
+                                className="heatmap-pill"
+                                style={{
+                                  backgroundColor: pill.color,
+                                  color: textColor(pill.color),
+                                }}
+                                title={`${pill.pillar} (${pill.count} initiative${pill.count > 1 ? 's' : ''})`}
+                              >
+                                {pill.pillar}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
-                {group.teams.map((team) => (
-                  <tr key={team.name} className="heatmap-team-row">
-                    <td className="heatmap-team-cell">{team.name}</td>
-                    {quarters.map((q) => {
-                      const pills = getPills(team.name, q);
-                      return (
-                        <td key={q} className="heatmap-data-cell">
-                          {pills.length > 0 && (
-                            <div className="heatmap-pills">
-                              {pills.map((pill, i) => (
-                                <span
-                                  key={i}
-                                  className="heatmap-pill"
-                                  style={{
-                                    backgroundColor: pill.color,
-                                    color: textColor(pill.color),
-                                  }}
-                                  title={`${pill.pillar} (${pill.count} initiative${pill.count > 1 ? 's' : ''})`}
-                                >
-                                  {pill.pillar}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </>
-            ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>

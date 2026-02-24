@@ -537,19 +537,26 @@ body {
   padding: 0.3rem 0.5rem;
 }
 
-.heatmap-suite-row td {
-  border-left: none;
-  border-right: none;
+.heatmap-suite-header {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+  width: 80px;
+  min-width: 80px;
 }
 
 .heatmap-suite-cell {
   background-color: var(--color-bg-light);
-  font-weight: 700;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-size: 0.6rem;
   color: var(--color-text-light);
-  padding: 0.2rem 0.5rem !important;
+  padding: 0 0.4rem !important;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .heatmap-team-row td {

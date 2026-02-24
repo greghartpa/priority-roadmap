@@ -13,7 +13,7 @@ const PILLAR_PALETTE = [
   { border: '#9B5DE5', bg: 'rgba(155, 93, 229, 0.08)' },    // purple (complement)
 ];
 
-const NONE_STYLE = { border: '#B8D4E3', bg: '#ffffff' };
+const NONE_STYLE = { border: '#CED4DA', bg: '#ffffff' };
 
 interface RoadmapGridProps {
   data: RoadmapData;

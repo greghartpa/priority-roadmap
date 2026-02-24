@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 import type { RoadmapData } from '../utils/excel';
 
-// 8 distinguishable hues — enough for 4 pillars with room to grow
+// 8 distinguishable hues derived from "Refreshing Summer Fun" palette
 const PILLAR_PALETTE = [
-  { border: '#1a73e8', bg: 'rgba(26, 115, 232, 0.08)' },   // blue
-  { border: '#e8781a', bg: 'rgba(232, 120, 26, 0.08)' },    // orange
-  { border: '#0d9488', bg: 'rgba(13, 148, 136, 0.08)' },    // teal
-  { border: '#7c3aed', bg: 'rgba(124, 58, 237, 0.08)' },    // purple
-  { border: '#dc3545', bg: 'rgba(220, 53, 69, 0.08)' },     // red
-  { border: '#16a34a', bg: 'rgba(22, 163, 74, 0.08)' },     // green
-  { border: '#ca8a04', bg: 'rgba(202, 138, 4, 0.08)' },     // gold
-  { border: '#db2777', bg: 'rgba(219, 39, 119, 0.08)' },    // pink
+  { border: '#219EBC', bg: 'rgba(33, 158, 188, 0.08)' },    // blue green
+  { border: '#FB8500', bg: 'rgba(251, 133, 0, 0.08)' },     // tiger orange
+  { border: '#023047', bg: 'rgba(2, 48, 71, 0.10)' },       // deep space blue
+  { border: '#FFB703', bg: 'rgba(255, 183, 3, 0.08)' },     // amber flame
+  { border: '#6BB8D6', bg: 'rgba(142, 202, 230, 0.12)' },   // sky blue (shade)
+  { border: '#E76F51', bg: 'rgba(231, 111, 81, 0.08)' },    // terracotta (complement)
+  { border: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.08)' },     // forest green (complement)
+  { border: '#9B5DE5', bg: 'rgba(155, 93, 229, 0.08)' },    // purple (complement)
 ];
 
-const NONE_STYLE = { border: '#adb5bd', bg: 'rgba(173, 181, 189, 0.08)' };
+const NONE_STYLE = { border: '#8EAABB', bg: 'rgba(142, 170, 187, 0.08)' };
 
 interface RoadmapGridProps {
   data: RoadmapData;

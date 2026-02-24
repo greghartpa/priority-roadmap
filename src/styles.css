@@ -1,15 +1,15 @@
 /* Global Styles */
 :root {
-  --color-primary: #1a73e8;
-  --color-primary-dark: #1557b0;
-  --color-accent: #e8781a;
-  --color-secondary: #6c757d;
-  --color-danger: #dc3545;
-  --color-warning: #e6a817;
-  --color-border: #dee2e6;
-  --color-bg-light: #f8f9fa;
-  --color-text: #212529;
-  --color-text-light: #6c757d;
+  --color-primary: #219EBC;          /* Blue Green */
+  --color-primary-dark: #1A7F96;     /* Blue Green (dark) */
+  --color-accent: #FB8500;           /* Tiger Orange */
+  --color-secondary: #5E7D8E;        /* Blue-gray (from palette blend) */
+  --color-danger: #dc3545;           /* Red (semantic) */
+  --color-warning: #FFB703;          /* Amber Flame */
+  --color-border: #B8D4E3;           /* Light Sky Blue */
+  --color-bg-light: #EEF5F9;         /* Very light Sky Blue tint */
+  --color-text: #023047;             /* Deep Space Blue */
+  --color-text-light: #5E7D8E;       /* Blue-gray */
 }
 
 * {
@@ -78,12 +78,12 @@ body {
 
 .file-drop-zone:hover {
   border-color: var(--color-primary);
-  background-color: rgba(26, 115, 232, 0.04);
+  background-color: rgba(33, 158, 188, 0.04);
 }
 
 .file-drop-zone--active {
   border-color: var(--color-primary);
-  background-color: rgba(26, 115, 232, 0.08);
+  background-color: rgba(33, 158, 188, 0.08);
 }
 
 .file-drop-zone--disabled {
@@ -111,7 +111,7 @@ body {
 .spinner--large {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(26, 115, 232, 0.3);
+  border: 2px solid rgba(33, 158, 188, 0.3);
   border-top-color: var(--color-primary);
 }
 
@@ -187,7 +187,7 @@ body {
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: #5a6268;
+  background-color: #4A6878;
 }
 
 .btn-small {
@@ -245,7 +245,7 @@ body {
 .filter-select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+  box-shadow: 0 0 0 3px rgba(33, 158, 188, 0.15);
 }
 
 /* Pillar Legend */
@@ -295,7 +295,7 @@ body {
 }
 
 .roadmap-grid tbody tr {
-  border-top: 2px solid #adb5bd;
+  border-top: 2px solid #8EAABB;
 }
 
 .roadmap-team-header,
@@ -358,11 +358,11 @@ body {
 }
 
 .roadmap-cell--has-items:hover {
-  background-color: rgba(26, 115, 232, 0.04);
+  background-color: rgba(33, 158, 188, 0.04);
 }
 
 .roadmap-cell--expanded {
-  background-color: rgba(26, 115, 232, 0.06);
+  background-color: rgba(33, 158, 188, 0.06);
 }
 
 /* Initiative chips inside cells */

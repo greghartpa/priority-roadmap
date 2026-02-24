@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FileLoader } from './components/FileLoader';
 import { RoadmapGrid } from './components/RoadmapGrid';
+import { HeatmapGrid } from './components/HeatmapGrid';
 import { parseRoadmap } from './utils/excel';
 import type { RoadmapData } from './utils/excel';
 import './styles.css';
@@ -12,6 +13,7 @@ function App() {
   const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [view, setView] = useState<'detail' | 'heatmap'>('detail');
 
   const handleLoad = (buffer: ArrayBuffer) => {
     setIsLoading(true);
@@ -39,7 +41,29 @@ function App() {
 
       <main className="app-main">
         <FileLoader onLoad={handleLoad} isLoading={isLoading} error={error} sourceUrl={SOURCE_URL} />
-        {roadmap && <RoadmapGrid data={roadmap} />}
+        {roadmap && (
+          <>
+            <div className="view-toggle">
+              <button
+                className={`view-toggle-btn${view === 'detail' ? ' view-toggle-btn--active' : ''}`}
+                onClick={() => setView('detail')}
+              >
+                Detail View
+              </button>
+              <button
+                className={`view-toggle-btn${view === 'heatmap' ? ' view-toggle-btn--active' : ''}`}
+                onClick={() => setView('heatmap')}
+              >
+                Heatmap View
+              </button>
+            </div>
+            {view === 'detail' ? (
+              <RoadmapGrid data={roadmap} />
+            ) : (
+              <HeatmapGrid data={roadmap} />
+            )}
+          </>
+        )}
       </main>
     </div>
   );

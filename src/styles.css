@@ -421,6 +421,187 @@ body {
   text-align: left;
 }
 
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+}
+
+.view-toggle-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid var(--color-border);
+  background-color: white;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.view-toggle-btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.view-toggle-btn:last-child {
+  border-radius: 0 4px 4px 0;
+  border-left: none;
+}
+
+.view-toggle-btn--active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.view-toggle-btn:not(.view-toggle-btn--active):hover {
+  background-color: var(--color-bg-light);
+  color: var(--color-text);
+}
+
+/* Heatmap Grid */
+.heatmap-container {
+  width: 100%;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.heatmap-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+}
+
+.heatmap-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.heatmap-grid-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.heatmap-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.heatmap-grid th,
+.heatmap-grid td {
+  border: 1px solid var(--color-border);
+  padding: 0;
+  vertical-align: middle;
+}
+
+.heatmap-team-header {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+  width: 150px;
+  min-width: 150px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.heatmap-quarter-header {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+}
+
+.heatmap-suite-row td {
+  border-left: none;
+  border-right: none;
+}
+
+.heatmap-suite-cell {
+  background-color: var(--color-bg-light);
+  font-weight: 700;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  padding: 0.2rem 0.5rem !important;
+}
+
+.heatmap-team-row td {
+  height: 22px;
+}
+
+.heatmap-team-cell {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--color-text);
+  padding: 0 0.4rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: white;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.heatmap-data-cell {
+  padding: 2px 3px !important;
+}
+
+.heatmap-bar {
+  display: flex;
+  height: 16px;
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.heatmap-bar--empty {
+  background-color: transparent;
+}
+
+.heatmap-bar-segment {
+  height: 100%;
+  min-width: 2px;
+  transition: opacity 0.15s ease;
+}
+
+.heatmap-bar-segment:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+.heatmap-bar-segment:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+.heatmap-bar-segment:only-child {
+  border-radius: 2px;
+}
+
+.heatmap-bar:hover .heatmap-bar-segment {
+  opacity: 0.8;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .app-header {

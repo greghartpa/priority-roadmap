@@ -565,27 +565,27 @@ body {
 }
 
 .heatmap-data-cell {
-  padding: 3px 4px !important;
+  padding: 2px 3px !important;
 }
 
-.heatmap-dots {
+.heatmap-pills {
   display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  align-items: center;
+  gap: 2px;
+  width: 100%;
 }
 
-.heatmap-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.heatmap-dot:hover {
-  transform: scale(1.4);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15);
+.heatmap-pill {
+  flex: 1;
+  display: block;
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Responsive */

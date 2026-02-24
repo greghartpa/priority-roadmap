@@ -14,6 +14,21 @@ const PILLAR_PALETTE = [
 
 const NONE_COLOR = '#CED4DA';
 
+// Choose white or dark text based on background luminance
+function textColor(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return lum > 0.55 ? '#023047' : '#ffffff';
+}
+
+interface PillarPill {
+  pillar: string;
+  color: string;
+  count: number;
+}
+
 interface HeatmapGridProps {
   data: RoadmapData;
 }
@@ -51,25 +66,29 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
     return groups;
   }, [teams]);
 
-  // Returns one dot per initiative, colored by pillar, sorted by pillar order
-  const getDots = (teamName: string, quarter: string) => {
+  // Group initiatives by unique pillar, return one pill per pillar
+  const getPills = (teamName: string, quarter: string): PillarPill[] => {
     const teamMap = grid.get(teamName);
     const initiatives = teamMap?.get(quarter) || [];
     if (initiatives.length === 0) return [];
 
-    return initiatives
-      .slice()
-      .sort((a, b) => {
-        const ai = pillars.indexOf(a.strategyPillar);
-        const bi = pillars.indexOf(b.strategyPillar);
-        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    const counts = new Map<string, number>();
+    for (const init of initiatives) {
+      const key = init.strategyPillar || '';
+      counts.set(key, (counts.get(key) || 0) + 1);
+    }
+
+    // Sort by pillar order for consistency
+    return Array.from(counts.entries())
+      .sort(([a], [b]) => {
+        if (!a) return 1;
+        if (!b) return -1;
+        return pillars.indexOf(a) - pillars.indexOf(b);
       })
-      .map((init) => ({
-        color: init.strategyPillar
-          ? (pillarColorMap.get(init.strategyPillar) || NONE_COLOR)
-          : NONE_COLOR,
-        pillar: init.strategyPillar || 'None',
-        name: init.name,
+      .map(([pillar, count]) => ({
+        pillar: pillar || 'None',
+        color: pillar ? (pillarColorMap.get(pillar) || NONE_COLOR) : NONE_COLOR,
+        count,
       }));
   };
 
@@ -110,18 +129,23 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
                   <tr key={team.name} className="heatmap-team-row">
                     <td className="heatmap-team-cell">{team.name}</td>
                     {quarters.map((q) => {
-                      const dots = getDots(team.name, q);
+                      const pills = getPills(team.name, q);
                       return (
                         <td key={q} className="heatmap-data-cell">
-                          {dots.length > 0 && (
-                            <div className="heatmap-dots">
-                              {dots.map((dot, i) => (
+                          {pills.length > 0 && (
+                            <div className="heatmap-pills">
+                              {pills.map((pill, i) => (
                                 <span
                                   key={i}
-                                  className="heatmap-dot"
-                                  style={{ backgroundColor: dot.color }}
-                                  title={`${dot.name} (${dot.pillar})`}
-                                />
+                                  className="heatmap-pill"
+                                  style={{
+                                    backgroundColor: pill.color,
+                                    color: textColor(pill.color),
+                                  }}
+                                  title={`${pill.pillar} (${pill.count} initiative${pill.count > 1 ? 's' : ''})`}
+                                >
+                                  {pill.pillar}
+                                </span>
                               ))}
                             </div>
                           )}

@@ -7,7 +7,7 @@ const PILLAR_PALETTE = [
   '#023047', // deep space blue
   '#06B6D4', // cyan
   '#D63384', // warm rose
-  '#EF4444', // red
+  '#10B981', // emerald
   '#2D6A4F', // forest green
   '#9B5DE5', // purple
 ];

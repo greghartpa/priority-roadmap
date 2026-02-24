@@ -8,7 +8,7 @@ const PILLAR_PALETTE = [
   { border: '#023047', bg: 'rgba(2, 48, 71, 0.10)' },       // deep space blue
   { border: '#06B6D4', bg: 'rgba(6, 182, 212, 0.08)' },      // cyan
   { border: '#D63384', bg: 'rgba(214, 51, 132, 0.08)' },     // warm rose (complement)
-  { border: '#EF4444', bg: 'rgba(239, 68, 68, 0.08)' },     // red
+  { border: '#10B981', bg: 'rgba(16, 185, 129, 0.08)' },     // emerald
   { border: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.08)' },     // forest green (complement)
   { border: '#9B5DE5', bg: 'rgba(155, 93, 229, 0.08)' },    // purple (complement)
 ];

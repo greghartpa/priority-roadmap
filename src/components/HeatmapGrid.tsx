@@ -51,39 +51,26 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
     return groups;
   }, [teams]);
 
-  const getBarSegments = (teamName: string, quarter: string) => {
+  // Returns one dot per initiative, colored by pillar, sorted by pillar order
+  const getDots = (teamName: string, quarter: string) => {
     const teamMap = grid.get(teamName);
     const initiatives = teamMap?.get(quarter) || [];
     if (initiatives.length === 0) return [];
 
-    // Count initiatives per pillar
-    const counts = new Map<string, number>();
-    for (const init of initiatives) {
-      const key = init.strategyPillar || '';
-      counts.set(key, (counts.get(key) || 0) + 1);
-    }
-
-    const total = initiatives.length;
-    const segments: { color: string; pct: number; pillar: string; count: number }[] = [];
-
-    // Sort by pillar order for consistent coloring
-    const sortedKeys = Array.from(counts.keys()).sort((a, b) => {
-      if (!a) return 1;
-      if (!b) return -1;
-      return pillars.indexOf(a) - pillars.indexOf(b);
-    });
-
-    for (const key of sortedKeys) {
-      const count = counts.get(key)!;
-      segments.push({
-        color: key ? (pillarColorMap.get(key) || NONE_COLOR) : NONE_COLOR,
-        pct: (count / total) * 100,
-        pillar: key || 'None',
-        count,
-      });
-    }
-
-    return segments;
+    return initiatives
+      .slice()
+      .sort((a, b) => {
+        const ai = pillars.indexOf(a.strategyPillar);
+        const bi = pillars.indexOf(b.strategyPillar);
+        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+      })
+      .map((init) => ({
+        color: init.strategyPillar
+          ? (pillarColorMap.get(init.strategyPillar) || NONE_COLOR)
+          : NONE_COLOR,
+        pillar: init.strategyPillar || 'None',
+        name: init.name,
+      }));
   };
 
   return (
@@ -123,27 +110,20 @@ export const HeatmapGrid: React.FC<HeatmapGridProps> = ({ data }) => {
                   <tr key={team.name} className="heatmap-team-row">
                     <td className="heatmap-team-cell">{team.name}</td>
                     {quarters.map((q) => {
-                      const segments = getBarSegments(team.name, q);
+                      const dots = getDots(team.name, q);
                       return (
                         <td key={q} className="heatmap-data-cell">
-                          {segments.length > 0 ? (
-                            <div
-                              className="heatmap-bar"
-                              title={segments.map((s) => `${s.pillar}: ${s.count}`).join(', ')}
-                            >
-                              {segments.map((seg, i) => (
-                                <div
+                          {dots.length > 0 && (
+                            <div className="heatmap-dots">
+                              {dots.map((dot, i) => (
+                                <span
                                   key={i}
-                                  className="heatmap-bar-segment"
-                                  style={{
-                                    width: `${seg.pct}%`,
-                                    backgroundColor: seg.color,
-                                  }}
+                                  className="heatmap-dot"
+                                  style={{ backgroundColor: dot.color }}
+                                  title={`${dot.name} (${dot.pillar})`}
                                 />
                               ))}
                             </div>
-                          ) : (
-                            <div className="heatmap-bar heatmap-bar--empty" />
                           )}
                         </td>
                       );

@@ -565,41 +565,27 @@ body {
 }
 
 .heatmap-data-cell {
-  padding: 2px 3px !important;
+  padding: 3px 4px !important;
 }
 
-.heatmap-bar {
+.heatmap-dots {
   display: flex;
-  height: 16px;
-  border-radius: 2px;
-  overflow: hidden;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-items: center;
 }
 
-.heatmap-bar--empty {
-  background-color: transparent;
+.heatmap-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.heatmap-bar-segment {
-  height: 100%;
-  min-width: 2px;
-  transition: opacity 0.15s ease;
-}
-
-.heatmap-bar-segment:first-child {
-  border-radius: 2px 0 0 2px;
-}
-
-.heatmap-bar-segment:last-child {
-  border-radius: 0 2px 2px 0;
-}
-
-.heatmap-bar-segment:only-child {
-  border-radius: 2px;
-}
-
-.heatmap-bar:hover .heatmap-bar-segment {
-  opacity: 0.8;
+.heatmap-dot:hover {
+  transform: scale(1.4);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive */
